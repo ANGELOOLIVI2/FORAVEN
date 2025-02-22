@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Interactiva - Zelda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        #rapunzel-image {
+            width: 400px;
+            position: fixed;
+            bottom: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        #dialog-container {
+            position: fixed;
+            bottom: 200px;
+            left: 0;
+            right: 0;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            z-index: 2;
+        }
+        #character-image {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+        #dialog-text {
+            font-family: 'Press Start 2P', cursive;
+            margin: 10px 0;
+            color: #fff;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+                         -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+        #options-container {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 3;
+        }
+        button {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #444;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body id="body" style="background-image: url('Imagenes/paisaje pixel1.jpg');">
+    <img id="rapunzel-image" src="Imagenes/rapunzelhand.jpg-removebg-preview.png" alt="rapunzel-image">
+    <div id="dialog-container">
+        <img id="character-image" src="images/link.png" alt="character-image">
+        <p id="dialog-text">Welcome Aven</p>
+    </div>
+    <div id="options-container">
+        <button onclick="nextDialog()">Siguiente</button>
+    </div>
+    <script>
+        const dialogs = [
+            { text: "Welcome", img: "images/link.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "I hope you enjoy this adventure", img: "images/zelda.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "But first put on this crown the princesses wear one", img: "images/ganon.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Let's see how you turned out", img: "images/link.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Wow you look great", img: "images/zelda.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Thanks for your Friendship", img: "images/link.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Aven, your heart beats with the same frequency as that of the children that one day you will help heal", img: "images/zelda.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Aven, you are a person with a heart full of love and compassion.", img: "images/ganon.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Your smile is contagious and your energy is positive and happy.", img: "images/link.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "You are an authentic and genuine person, always being yourself.", img: "images/zelda.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Your kindness and empathy towards others are characteristics that make you stand out.", img: "images/ganon.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Aven, you are a person with a great sense of responsibility and respect for others.", img: "images/link.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Aven, your optimism is contagious and always makes us see the positive side of things.", img: "images/zelda.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "You are a person with a great ability to listen to and understand others.", img: "images/ganon.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Your determination and perseverance are characteristics that make you stand out in everything you do.", img: "images/link.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Aven, your authenticity and originality are characteristics that make you unique and special", img: "images/zelda.png", bg: "Imagenes/paisaje pixel1.jpg" },
+            { text: "Aven, you are a person who shines with your own light and makes others shine too.", img: "images/ganon.png", bg: "Imagenes/paisaje pixel1.jpg" }
+        ];
+        let currentDialogIndex = 0;
+
+        function nextDialog() {
+            if (currentDialogIndex < dialogs.length - 1) {
+                currentDialogIndex++;
+                document.getElementById('dialog-text').innerText = dialogs[currentDialogIndex].text;
+                document.getElementById('character-image').src = dialogs[currentDialogIndex].img;
+                document.getElementById('body').style.backgroundImage = 'url("Imagenes/paisaje pixel1.jpg")';
+
+                if (currentDialogIndex === 1) {
+                    document.getElementById('rapunzel-image').style.display = 'none';
+                    const newImage = document.createElement('img');
+                    newImage.id = 'rapunzel-con-sarten';
+                    newImage.src = 'Imagenes/rapunzel_con_sarten-removebg-preview.png';
+                    newImage.style.position = 'fixed';
+                    newImage.style.bottom = '-150px'; // Bajado más
+                    newImage.style.left = '50%';
+                    newImage.style.transform = 'translateX(-50%)';
+                    newImage.style.width = '450px'; // Tamaño ajustado
+                    newImage.style.zIndex = '1';
+                    document.body.appendChild(newImage);
+                } else if (currentDialogIndex === 2) {
+                    const existingImage = document.getElementById('rapunzel-con-sarten');
+                    if (existingImage) {
+                        existingImage.src = 'Imagenes/corona_pixel-removebg-preview.png';
+                        existingImage.style.position = 'fixed';
+                        existingImage.style.top = '10px';
+                        existingImage.style.left = '50%';
+                        existingImage.style.transform = 'translateX(-50%)';
+                        existingImage.style.width = '500px';
+                        existingImage.style.zIndex = '1';
+                    } else {
+                        const newImage = document.createElement('img');
+                        newImage.id = 'rapunzel-con-sarten';
+                        newImage.src = 'Imagenes/corona_pixel-removebg-preview.png';
+                        newImage.style.position = 'fixed';
+                        newImage.style.top = '10px';
+                        newImage.style.left = '50%';
+                        newImage.style.transform = 'translateX(-50%)';
+                        newImage.style.width = '500px';
+                        newImage.style.zIndex = '1';
+                        document.body.appendChild(newImage);
+                    }
+                } else if (currentDialogIndex === 4) {
+                    const newImage = document.createElement('img');
+                    newImage.id = 'rapunzel-corona';
+                    newImage.src = 'Imagenes/rapunzel_corona-removebg-preview.png';
+                    newImage.style.position = 'fixed';
+                    newImage.style.bottom = '-70px';
+                    newImage.style.left = '50%';
+                    newImage.style.transform = 'translateX(-50%)';
+                    newImage.style.width = '400px';
+                    newImage.style.zIndex = '1';
+                    document.body.appendChild(newImage);
+                } else {
+                    const rapunzelCoronaImage = document.getElementById('rapunzel-corona');
+                    if (rapunzelCoronaImage) {
+                        rapunzelCoronaImage.style.display = 'none';
+                    }
+                    const rapunzelSartenImage = document.getElementById('rapunzel-con-sarten');
+                    if (rapunzelSartenImage) {
+                        rapunzelSartenImage.style.display = 'none';
+                    }
+                }
+            } else {
+                alert('Fin de los diálogos');
+            }
+        }
+    </script>
+</body>
+</html>
